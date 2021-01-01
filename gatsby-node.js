@@ -8,4 +8,4 @@ require('ts-node').register({
 
 require('tsconfig-paths')
 
-exports.createPages = require('./gatsby/createPages').createPages
+// exports.createPages = require('./gatsby/createPages').createPages
