@@ -3,6 +3,8 @@ import Layout from '@components/layout'
 
 import Headline from '@components/shared/headline'
 import Post from '@components/post/post'
+import Sidebar from '@components/shared/sidebar'
+import SearchField from '@components/shared/searchField'
 
 const IndexPage: React.FC = () => (
   <Layout>
@@ -41,10 +43,12 @@ const IndexPage: React.FC = () => (
           />
         </section>
         <aside className="w-1/4">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta
-          ducimus soluta tempora exercitationem provident dignissimos adipisci!
-          Cupiditate eaque consequatur soluta ipsa animi officia porro sequi
-          excepturi distinctio hic. Natus, in.
+          <Sidebar>
+            <SearchField />
+            <div>lorem ipsum</div>
+            <div>lorem ipsum</div>
+            <div>lorem ipsum</div>
+          </Sidebar>
         </aside>
       </div>
     </div>

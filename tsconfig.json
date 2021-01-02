@@ -24,7 +24,8 @@
       "@svg/*": ["src/assets/svg/*"],
       "@utils/*": ["src/utils/*"],
       "@config/*": ["config/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./typings"]
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

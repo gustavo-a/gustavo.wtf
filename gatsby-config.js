@@ -4,13 +4,10 @@ require('dotenv').config({
   path: '.env'
 })
 
+const siteMetadata = require('./config/metadata')
+
 module.exports = {
-  siteMetadata: {
-    title: 'Gatsby Default Starter',
-    description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@gatsbyjs'
-  },
+  siteMetadata,
   plugins: [
     'gatsby-plugin-react-helmet',
     {
@@ -27,10 +24,47 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-typescript',
+      options: {
+        isTSX: true, // defaults to false
+        jsxPragma: 'jsx', // defaults to "React"
+        allExtensions: true // defaults to false
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-readingtime',
+      options: {
+        types: {
+          WpPost: source => {
+            const { blocks } = source
+            return blocks.map(block => block.saveContent).join('')
+          }
+        }
+      }
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
         path: path.join(__dirname, 'src/images')
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-wordpress-preview',
+      options: {
+        graphqlEndpoint: process.env.WP_GRAPHQL_URL,
+        debug: true
+      }
+    },
+    {
+      resolve: 'gatsby-source-wordpress-experimental',
+      options: {
+        url: process.env.WP_GRAPHQL_URL,
+        type: {
+          Post: {
+            limit: process.env.NODE_ENV === 'development' ? 50 : null
+          }
+        }
       }
     },
     {
