@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -24,8 +25,8 @@
       "@svg/*": ["src/assets/svg/*"],
       "@utils/*": ["src/utils/*"],
       "@config/*": ["config/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./typings"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "gatsby/**/*"],
+  "exclude": ["node_modules/**/*"]
 }

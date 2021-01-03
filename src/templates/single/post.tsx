@@ -1,9 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-// import { Container } from './styles';
+type Props = {
+  data: object
+}
 
-const post: React.FC = ({ data }) => {
+const post: React.FC<Props> = ({ data }) => {
   return <div>{data}</div>
 }
 

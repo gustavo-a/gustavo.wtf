@@ -9,13 +9,14 @@
     "autoprefixer": "^10.1.0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.26.1",
+    "gatsby": "^2.24.92",
     "gatsby-awesome-pagination": "^0.3.6",
     "gatsby-image": "^2.5.0",
     "gatsby-plugin-advanced-sitemap": "^1.5.6",
     "gatsby-plugin-disqus": "^1.2.2",
     "gatsby-plugin-html-attributes": "^1.0.5",
     "gatsby-plugin-manifest": "^2.9.1",
+    "gatsby-plugin-next-seo": "^1.6.1",
     "gatsby-plugin-nprogress": "^2.7.0",
     "gatsby-plugin-offline": "^3.4.0",
     "gatsby-plugin-postcss": "^3.4.0",
@@ -44,7 +45,9 @@
     "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
+    "@types/node": "^14.14.19",
     "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.16.0",
@@ -70,8 +73,10 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "type-check": "tsc --pretty --noEmit",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
+  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/gustavo-a/gustavo.wtf"
