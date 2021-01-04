@@ -36,8 +36,8 @@ module.exports = {
       options: {
         types: {
           WpPost: source => {
-            const { blocks } = source
-            return blocks.map(block => block.saveContent).join('')
+            const { content } = source
+            return content
           }
         }
       }
@@ -46,14 +46,25 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: path.join(__dirname, 'src/images')
+        path: path.join(__dirname, 'src/assets/images')
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-algolia',
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: require('./src/utils/algolia-queries'),
+        indexName: process.env.ALGOLIA_INDEX_NAME,
+        skipIndexing: process.env.NODE_ENV === 'development'
       }
     },
     {
       resolve: 'gatsby-plugin-wordpress-preview',
       options: {
         graphqlEndpoint: process.env.WP_GRAPHQL_URL,
-        debug: true
+        debug: true,
+        processMediaItems: false
       }
     },
     {
@@ -109,7 +120,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png' // This path is relative to the root of the site.
+        icon: './src/assets/images/gatsby-icon.png' // This path is relative to the root of the site.
       }
     },
     'gatsby-plugin-offline'

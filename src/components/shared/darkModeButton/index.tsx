@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './style.module.css'
 
 const darkModeButton: React.FC = () => {
   const [icon, setIcon] = useState('moon')
+
+  useEffect(() => {
+    localStorage.getItem('theme') === 'light' && setIcon('moon')
+    localStorage.getItem('theme') === 'dark' && setIcon('sun')
+  }, [])
 
   function toggleColorMode(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

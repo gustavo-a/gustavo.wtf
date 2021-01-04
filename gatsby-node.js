@@ -17,30 +17,24 @@ const createPages = async ({ graphql, actions }) => {
             id
             slug
             status
-            categories {
-              edges {
-                node {
-                  slug
-                }
+            tags {
+              nodes {
+                name
+                slug
               }
             }
           }
         }
       }
 
-      allWpCategory(filter: { count: { gte: 1 } }) {
-        edges {
-          node {
-            id
-            name
-            slug
-            posts {
-              edges {
-                node {
-                  id
-                  slug
-                }
-              }
+      allWpTag(filter: { count: { gte: 1 } }) {
+        nodes {
+          name
+          slug
+          posts {
+            nodes {
+              id
+              slug
             }
           }
         }
@@ -53,8 +47,8 @@ const createPages = async ({ graphql, actions }) => {
     return Promise.reject(result.errors)
   }
 
-  const postTemplate = resolve('@templates/single/post.js')
-  const blogTemplate = resolve('@templates/archive/blog.js')
+  const postTemplate = resolve('./src/templates/single/post.js')
+  const blogTemplate = resolve('./src/templates/archive/blog.js')
 
   // In production builds, filter for only published posts.
   const allPosts = result.data.allWpPost.edges
@@ -72,7 +66,7 @@ const createPages = async ({ graphql, actions }) => {
       component: postTemplate,
       context: {
         id: post.id,
-        categories: post.categories.edges.map(({ node: slug }) => slug)
+        tags: post.tags.nodes.map(({ slug }) => slug)
       }
     })
 
@@ -86,22 +80,21 @@ const createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const categories = result.data.allWpCategory.edges
+  const tags = result.data.allWpTag.nodes
 
-  // Iterate over the array of categories
-  each(categories, ({ node: category }) => {
+  // Iterate over the array of tags
+  each(tags, ({ name, slug, posts }) => {
     // Create a paginated blog, e.g., /, /page/2, /page/3
     paginate({
       createPage,
-      items: category.posts.edges,
+      items: posts.nodes,
       itemsPerPage: 10,
       pathPrefix: ({ pageNumber }) =>
-        pageNumber === 0
-          ? `/categoria/${category.slug}`
-          : `/categoria/${category.slug}/page`,
+        pageNumber === 0 ? `/tag/${slug}` : `/tag/${slug}/page`,
       component: blogTemplate,
       context: {
-        categorySlug: [category.slug]
+        tagSlug: slug,
+        tagName: name
       }
     })
   })
