@@ -8,6 +8,9 @@ import SinglePost from '@components/post/single/singlePost'
 import Author from '@/components/post/single/author'
 import Comments from '@/components/post/single/comments'
 
+import Seo from '@components/infra/seo'
+import { BlogPostJsonLd } from 'gatsby-plugin-next-seo'
+
 const post = ({ data, pageContext }) => {
   const {
     title,
@@ -17,12 +20,20 @@ const post = ({ data, pageContext }) => {
     tags,
     featuredImage,
     author,
-    slug
+    slug,
+    seo
   } = data.post
 
   const readRef = useRef()
   return (
     <Layout>
+      <Seo
+        title={seo.title}
+        canonical={seo.canonical}
+        description={seo.metaDesc}
+        type="blog"
+      />
+
       <div className="container">
         <div className="flex justify-center items-center flex-col mb-24">
           <ReadProgressBar

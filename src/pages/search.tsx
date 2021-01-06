@@ -5,9 +5,12 @@ import SearchField from '@components/shared/search/searchField'
 
 import Arrow from '@svg/arrow.svg'
 
+import Seo from '@components/infra/seo'
+
 const search: React.FC = () => {
   return (
     <Layout>
+      <Seo title="Buscar | Gustavo Rocha" />
       <div className="container">
         <div className="flex justify-center py-16">
           <div className="xl:w-4/5">

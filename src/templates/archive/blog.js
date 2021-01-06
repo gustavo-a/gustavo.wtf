@@ -9,6 +9,8 @@ import SearchLink from '@/components/shared/search/searchLink'
 import TagList from '@components/shared/widgets/tagList'
 import Pagination from '@components/pagination'
 
+import Seo from '@components/infra/seo'
+
 const IndexPage = ({
   data: { allPosts, allTags, postsByTag },
   pageContext
@@ -18,6 +20,13 @@ const IndexPage = ({
 
   return (
     <Layout>
+      <Seo
+        title={
+          pageContext.tagName
+            ? `Artigos sobre ${pageContext.tagName} | Gustavo Rocha`
+            : ''
+        }
+      />
       <div className="container mt-24 mb-24 px-4">
         <div className="flex">
           <div className="w-full lg:w-5/12">
