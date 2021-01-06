@@ -9,7 +9,6 @@ import Author from '@/components/post/single/author'
 import Comments from '@/components/post/single/comments'
 
 import Seo from '@components/infra/seo'
-import { BlogPostJsonLd } from 'gatsby-plugin-next-seo'
 
 const post = ({ data, pageContext }) => {
   const {
@@ -46,9 +45,9 @@ const post = ({ data, pageContext }) => {
               title={title}
               content={content}
               date={date}
-              readingTime={readingTime.minutes}
-              tags={tags.nodes}
-              featuredImage={featuredImage.node}
+              readingTime={readingTime && readingTime.minutes}
+              tags={tags && tags.nodes}
+              featuredImage={featuredImage && featuredImage.node}
             />
 
             <hr className="border-t border-gray-300" />
