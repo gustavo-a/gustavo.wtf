@@ -8,6 +8,7 @@ const siteMetadata = require('./config/metadata')
 
 module.exports = {
   siteMetadata,
+  flags: { PRESERVE_WEBPACK_CACHE: true, FAST_DEV: true, LAZY_IMAGES: true },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
