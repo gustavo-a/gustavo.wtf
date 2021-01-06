@@ -15,6 +15,8 @@ const post = ({ data, pageContext }) => {
     title,
     content,
     date,
+    dateGmt,
+    modifiedGmt,
     readingTime,
     tags,
     featuredImage,
@@ -30,7 +32,10 @@ const post = ({ data, pageContext }) => {
         title={seo.title}
         canonical={seo.canonical}
         description={seo.metaDesc}
-        type="blog"
+        type="post"
+        images={featuredImage && featuredImage.node}
+        date={dateGmt}
+        modified={modifiedGmt}
       />
 
       <div className="container">

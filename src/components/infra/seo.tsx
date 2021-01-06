@@ -1,18 +1,31 @@
 import React from 'react'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
-import {
-  GatsbySeo,
-  OpenGraphImages,
-  BlogPostJsonLd
-} from 'gatsby-plugin-next-seo'
+import { GatsbySeo, BlogPostJsonLd } from 'gatsby-plugin-next-seo'
+import { GatsbyImageFixedProps, GatsbyImageFluidProps } from 'gatsby-image'
 
 interface Props {
   title?: string
   description?: string
   canonical?: string
-  images?: OpenGraphImages[]
+  images?: Images
   type?: string
+  date?: string
+  modified?: string
+}
+
+type Images = {
+  altText: string
+  localFile: {
+    childImageSharp: {
+      thumb: GatsbyImageFluidProps
+      featured: GatsbyImageFluidProps
+      ogImage: GatsbyImageFixedProps
+      ogImageSquare: GatsbyImageFixedProps
+      ogImageFourXThree: GatsbyImageFixedProps
+      ogImageSixteenXNine: GatsbyImageFixedProps
+    }
+  }
 }
 
 const seo: React.FC<Props> = ({
@@ -20,7 +33,9 @@ const seo: React.FC<Props> = ({
   description,
   canonical,
   images,
-  type
+  type,
+  date,
+  modified
 }) => {
   const { pathname } = useLocation()
   const seoQuery = useStaticQuery(graphql`
@@ -41,6 +56,24 @@ const seo: React.FC<Props> = ({
   `)
 
   const defaults = seoQuery.site.siteMetadata
+  images?.localFile.childImageSharp
+
+  const openGraphImages = (img: Images) => {
+    return Object.keys(img.localFile.childImageSharp).map((key, index) => {
+      const url = `${defaults.siteUrl}${img.localFile.childImageSharp[key].src}`
+
+      const og = {
+        url: url,
+        width: img.localFile.childImageSharp[key].width,
+        height: img.localFile.childImageSharp[key].height,
+        alt: img?.altText
+      }
+
+      Object.keys(og).forEach(key => og[key] === undefined && delete og[key])
+
+      return { og, flattened: url }
+    })
+  }
 
   return (
     <>
@@ -59,7 +92,7 @@ const seo: React.FC<Props> = ({
           title: title || `${defaults.title} | ${defaults.siteName}`,
           description: description || defaults.description,
           site_name: defaults.siteName,
-          images
+          images: images && openGraphImages(images).map(item => item.og)
         }}
         twitter={{
           handle: defaults.twitterUsername,
@@ -69,7 +102,7 @@ const seo: React.FC<Props> = ({
           cardType: 'summary_large_image'
         }}
       />
-      {type && type === 'blog' && (
+      {type && type === 'post' && (
         <BlogPostJsonLd
           url={
             canonical
@@ -77,13 +110,11 @@ const seo: React.FC<Props> = ({
               : `${defaults.siteUrl}${pathname}`
           }
           title={title}
-          images={[
-            'https://example.com/photos/1x1/photo.jpg',
-            'https://example.com/photos/4x3/photo.jpg',
-            'https://example.com/photos/16x9/photo.jpg'
-          ]}
-          datePublished="2015-02-05T08:00:00+08:00"
-          dateModified="2015-02-05T09:00:00+08:00"
+          // @ts-ignore
+          images={images && openGraphImages(images).map(item => item.flattened)}
+          // @ts-ignore
+          datePublished={date && date}
+          dateModified={modified && modified}
           authorName={defaults.author}
           description={description || defaults.description}
         />
