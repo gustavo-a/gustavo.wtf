@@ -12,6 +12,8 @@ export const postFields = graphql`
       minutes
     }
     date(formatString: "D [de] MMMM [de] YYYY", locale: "pt")
+    dateGmt
+    modifiedGmt
   }
 `
 export const postTags = graphql`
@@ -37,6 +39,18 @@ export const featuredImage = graphql`
             }
             featured: fluid(maxWidth: 1000) {
               ...GatsbyImageSharpFluid_withWebp
+            }
+            ogImage: fixed(width: 1200, height: 630) {
+              ...GatsbyImageSharpFixed_noBase64
+            }
+            ogImageSquare: fixed(width: 1000, height: 1000) {
+              ...GatsbyImageSharpFixed_noBase64
+            }
+            ogImageFourXThree: fixed(width: 1200, height: 900) {
+              ...GatsbyImageSharpFixed_noBase64
+            }
+            ogImageSixteenXNine: fixed(width: 1600, height: 900) {
+              ...GatsbyImageSharpFixed_noBase64
             }
           }
         }
