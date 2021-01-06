@@ -8,7 +8,7 @@ import DarkModeButton from '@components/shared/darkModeButton/index'
 const Header: React.FC = () => (
   <header>
     <div className="container px-4 py-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center">
         <Logo />
 
         <div className="flex items-center">

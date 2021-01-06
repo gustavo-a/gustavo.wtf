@@ -14,12 +14,12 @@ const author: React.FC<Props> = ({
   description
 }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-wrap md:flex-nowrap items-center">
       <img
         src={avatar}
         alt={`${firstName} ${lastName}`}
         loading="lazy"
-        className="rounded-full mr-4"
+        className="rounded-full mr-4 mb-4 md:mb-0"
       />
       <div>
         <div className="text-xl font-display font-bold mb-3">

@@ -27,7 +27,7 @@ const IndexPage = ({
             : ''
         }
       />
-      <div className="container mt-24 mb-24 px-4">
+      <div className="container my-12 md:my-24 px-4">
         <div className="flex">
           <div className="w-full lg:w-5/12">
             <Headline
@@ -47,7 +47,7 @@ const IndexPage = ({
       </div>
 
       <div className="container px-4">
-        <div className="flex justify-between">
+        <div className="flex flex-wrap justify-between">
           <section className="max-w-prose">
             {posts &&
               posts.map(
@@ -76,7 +76,7 @@ const IndexPage = ({
                 )
               )}
           </section>
-          <aside className="w-1/4">
+          <aside className="lg:w-1/4">
             <Sidebar>
               <SearchLink />
               <TagList tags={tags} />

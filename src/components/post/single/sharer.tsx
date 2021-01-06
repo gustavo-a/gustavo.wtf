@@ -6,7 +6,6 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
   RedditShareButton,
-  TelegramShareButton,
   TwitterShareButton,
   WhatsappShareButton,
   EmailIcon,
@@ -24,7 +23,7 @@ interface Props {
   round: boolean
   bgStyle: object
   className?: string
-  attachTo: RefObject<any>
+  attachTo?: RefObject<any>
 }
 
 const sharer: React.FC<Props> = ({
@@ -37,7 +36,7 @@ const sharer: React.FC<Props> = ({
 }) => {
   const [showSharer, setShowSharer] = useState(false)
 
-  function trackScrollEvent() {
+  function trackScrollEvent(event, attatchedEl) {
     const sharer = document.querySelector('#blog-sharer')
     if (!sharer) return
 
@@ -48,7 +47,7 @@ const sharer: React.FC<Props> = ({
     const {
       top: textTop,
       bottom: textBottom
-    } = attachTo.current.getBoundingClientRect()
+    } = attatchedEl.current.getBoundingClientRect()
 
     const limit = 100
 
@@ -65,12 +64,18 @@ const sharer: React.FC<Props> = ({
       attachTo.current &&
       attachTo.current.getBoundingClientRect()
     ) {
-      window.addEventListener('scroll', trackScrollEvent)
+      window.addEventListener('scroll', e => trackScrollEvent(e, attachTo))
     }
     return () => {
-      window.removeEventListener('scroll', trackScrollEvent)
+      window.removeEventListener('scroll', e => trackScrollEvent(e, attachTo))
     }
   }, [attachTo])
+
+  useEffect(() => {
+    if (!attachTo) {
+      setShowSharer(true)
+    }
+  }, [])
 
   const { pathname } = useLocation()
 
@@ -92,7 +97,7 @@ const sharer: React.FC<Props> = ({
       }}
       className={`${className} transition-all duration-200`}
     >
-      <p className="text-sm font-bold">Compartilhe</p>
+      <p className="text-sm font-bold hidden sm:block">Compartilhe</p>
       <EmailShareButton url={currentUrl}>
         <EmailIcon {...shareIconsOptions} />
       </EmailShareButton>
@@ -105,9 +110,6 @@ const sharer: React.FC<Props> = ({
       <RedditShareButton url={currentUrl}>
         <RedditIcon {...shareIconsOptions} />
       </RedditShareButton>
-      <TelegramShareButton url={currentUrl}>
-        <TelegramIcon {...shareIconsOptions} />
-      </TelegramShareButton>
       <TwitterShareButton url={currentUrl}>
         <TwitterIcon {...shareIconsOptions} />
       </TwitterShareButton>

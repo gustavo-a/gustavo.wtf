@@ -25,7 +25,7 @@ const singlePost: React.FC<Props> = ({
   const sharerRef = useRef()
 
   return (
-    <article className="mb-16">
+    <article className="mb-8 md:mb-16">
       <div className="max-w-prose m-auto mb-12">
         <h1 className="text-4xl font-display font-bold mb-4">{title}</h1>
         <PostMeta date={date} readingTime={readingTime} tags={tags} />
@@ -47,7 +47,16 @@ const singlePost: React.FC<Props> = ({
       ></div>
       <Sharer
         attachTo={sharerRef}
-        className="grid gap-y-4 grid-cols-1 fixed top-1/2 transform-gpu -translate-y-1/2"
+        className="hidden lg:grid gap-y-4 grid-cols-1 fixed top-1/2 transform-gpu -translate-y-1/2"
+        bgStyle={{
+          fill: '#aaa'
+        }}
+        iconClass="ml-3 fill-current text-gray-400"
+        round={true}
+        size={32}
+      />
+      <Sharer
+        className="flex flex-wrap lg:hidden items-center justify-end mt-12"
         bgStyle={{
           fill: '#aaa'
         }}

@@ -8,9 +8,9 @@ import GithubIcon from '@svg/github.svg'
 const footer: React.FC = () => {
   return (
     <footer>
-      <div className="container pb-12">
-        <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
-          <div>
+      <div className="container pb-12 px-4">
+        <div className="flex flex-wrap items-center justify-between text-sm text-gray-700 dark:text-gray-300">
+          <div className="mb-4 md:mb-0">
             <p>
               Copyright © 2020, Gustavo Rocha. Todos os direitos reservados.{' '}
               <Link className="hover:underline" to="/politica-de-privacidade">
