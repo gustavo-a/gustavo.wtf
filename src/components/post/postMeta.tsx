@@ -35,8 +35,9 @@ const postMeta: React.FC<Props> = ({ readingTime, date, tags }) => {
           ))}
       </div>
       <div className="flex justify-between">
-        <div>{date}</div>
-        <div>{formatReadingTime(readingTime)}</div>
+        <div>
+          {date} • {formatReadingTime(readingTime)}
+        </div>
       </div>
     </div>
   )

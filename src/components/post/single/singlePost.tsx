@@ -25,7 +25,7 @@ const singlePost: React.FC<Props> = ({
   const sharerRef = useRef()
 
   return (
-    <article>
+    <article className="mb-16">
       <div className="max-w-prose m-auto mb-12">
         <h1 className="text-4xl font-display font-bold mb-4">{title}</h1>
         <PostMeta date={date} readingTime={readingTime} tags={tags} />
