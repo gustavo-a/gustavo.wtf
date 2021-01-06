@@ -104,6 +104,7 @@ module.exports = {
         shortname: 'gustavo-wtf'
       }
     },
+    'gatsby-plugin-next-seo',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-preload-link-crossorigin',
