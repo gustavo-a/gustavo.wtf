@@ -1,9 +1,13 @@
 import React from 'react'
+import Layout from '@components/layout'
 
-// import { Container } from './styles';
-
-const contado: React.FC = () => {
-  return <div />
+const contato: React.FC = () => {
+  return (
+    <Layout>
+      <br />
+      <br />
+    </Layout>
+  )
 }
 
-export default contado
+export default contato
