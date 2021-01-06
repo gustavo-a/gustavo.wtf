@@ -98,6 +98,12 @@ module.exports = {
         lang: 'pt-BR'
       }
     },
+    {
+      resolve: 'gatsby-plugin-disqus',
+      options: {
+        shortname: 'gustavo-wtf'
+      }
+    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-preload-link-crossorigin',
