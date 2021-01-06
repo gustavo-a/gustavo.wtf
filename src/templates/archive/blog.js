@@ -39,7 +39,7 @@ const IndexPage = ({
 
       <div className="container px-4">
         <div className="flex justify-between">
-          <section className="w-5/12">
+          <section className="max-w-prose">
             {posts &&
               posts.map(
                 ({
