@@ -23,6 +23,7 @@ const searchField = () => {
       <SearchBox
         // @ts-ignore
         className={styles.searchInput}
+        autoFocus={true}
         translations={{
           submitTitle: 'Submit your search query.',
           resetTitle: 'Clear your search query.',
