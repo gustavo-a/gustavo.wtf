@@ -46,6 +46,7 @@ const post: React.FC<Props> = ({
             className="mb-8 shadow-lg dark:shadow-gray-300-lg transition-shadow"
             alt={image?.altText}
             fluid={image?.localFile.childImageSharp.thumb}
+            loading="lazy"
           ></Img>
         </Link>
       )}
