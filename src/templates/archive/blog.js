@@ -5,7 +5,7 @@ import { graphql } from 'gatsby'
 import Headline from '@components/shared/headline'
 import Post from '@components/post/post'
 import Sidebar from '@components/shared/sidebar'
-import SearchField from '@components/shared/search/searchField'
+import SearchLink from '@/components/shared/search/searchLink'
 import TagList from '@components/shared/widgets/tagList'
 import Pagination from '@components/pagination'
 
@@ -69,7 +69,7 @@ const IndexPage = ({
           </section>
           <aside className="w-1/4">
             <Sidebar>
-              <SearchField />
+              <SearchLink />
               <TagList tags={tags} />
             </Sidebar>
           </aside>
