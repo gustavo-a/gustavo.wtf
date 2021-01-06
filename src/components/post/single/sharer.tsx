@@ -50,7 +50,9 @@ const sharer: React.FC<Props> = ({
       bottom: textBottom
     } = attachTo.current.getBoundingClientRect()
 
-    if (sharerTop > textTop && sharerBottom < textBottom) {
+    const limit = 100
+
+    if (sharerTop - limit > textTop && sharerBottom + limit < textBottom) {
       setShowSharer(true)
     } else {
       setShowSharer(false)
@@ -88,7 +90,7 @@ const sharer: React.FC<Props> = ({
         opacity: showSharer ? 100 : 0,
         pointerEvents: showSharer ? 'auto' : 'none'
       }}
-      className={`${className} transition-all duration-300`}
+      className={`${className} transition-all duration-200`}
     >
       <p className="text-sm font-bold">Compartilhe</p>
       <EmailShareButton url={currentUrl}>
