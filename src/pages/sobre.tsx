@@ -1,9 +1,13 @@
 import React from 'react'
-
-// import { Container } from './styles';
+import Layout from '@components/layout'
 
 const sobre: React.FC = () => {
-  return <div />
+  return (
+    <Layout>
+      <br />
+      <br />
+    </Layout>
+  )
 }
 
 export default sobre
