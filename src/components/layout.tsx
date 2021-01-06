@@ -22,7 +22,7 @@ const layout: React.FC = ({ children }) => {
           `}
         </script>
       </Helmet>
-      <div className="w-screen h-full flex flex-col min-h-screen overflow-x-hidden">
+      <div className="w-screen h-full flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
