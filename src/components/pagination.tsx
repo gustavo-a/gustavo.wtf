@@ -33,7 +33,10 @@ const pagination = ({ pageContext, pathPrefix }) => {
               <Link to={nextPagePath} rel="next">
                 <div className="font-display text-xl flex">
                   próxima página{' '}
-                  <Arrow width={20} className="fill-current text-black ml-4" />
+                  <Arrow
+                    width={20}
+                    className="fill-current text-black ml-4 dark:text-white"
+                  />
                 </div>
               </Link>
             </div>
