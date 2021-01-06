@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Img, { FluidObject } from 'gatsby-image'
 
-import PostMeta from '@components/post/postMeta'
+import PostMeta, { Tag } from '@components/post/postMeta'
 import formatExcerpt from '@utils/formatExcerpt'
 
 interface Props {
@@ -11,20 +11,18 @@ interface Props {
   tags: Tag[]
   readingTime: number
   date: string
-  image?: {
-    altText: string
-    localFile: {
-      childImageSharp: {
-        thumb: FluidObject | FluidObject[]
-      }
-    }
-  }
+  image?: FeaturedImage
   url: string
 }
 
-type Tag = {
-  name: string
-  slug: string
+export type FeaturedImage = {
+  altText: string
+  localFile: {
+    childImageSharp: {
+      thumb: FluidObject | FluidObject[]
+      featured: FluidObject | FluidObject[]
+    }
+  }
 }
 
 const post: React.FC<Props> = ({

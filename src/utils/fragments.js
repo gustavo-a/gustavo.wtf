@@ -35,9 +35,36 @@ export const featuredImage = graphql`
             thumb: fluid(maxWidth: 600) {
               ...GatsbyImageSharpFluid_withWebp
             }
+            featured: fluid(maxWidth: 1000) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
       }
+    }
+  }
+`
+export const author = graphql`
+  fragment Author on WpPost {
+    author {
+      node {
+        avatar {
+          url
+        }
+        firstName
+        lastName
+        description
+      }
+    }
+  }
+`
+
+export const seo = graphql`
+  fragment Seo on WpPost {
+    seo {
+      canonical
+      metaDesc
+      title
     }
   }
 `

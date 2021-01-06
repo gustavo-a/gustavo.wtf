@@ -6,7 +6,7 @@ interface Props {
   tags: Tag[]
 }
 
-type Tag = {
+export type Tag = {
   name: string
   slug: string
 }
@@ -24,14 +24,15 @@ const postMeta: React.FC<Props> = ({ readingTime, date, tags }) => {
     <div className="text-sm text-gray-600 dark:text-gray-300 transition-colors mb-4">
       <div className="mb-2">
         tags:{' '}
-        {tags.map(({ name, slug }, index, array) => (
-          <span key={slug}>
-            <Link className="hover:underline" to={`/tag/${slug}`}>
-              {name}
-            </Link>
-            {array.length - 1 > index && <span>{', '}</span>}
-          </span>
-        ))}
+        {tags &&
+          tags.map(({ name, slug }, index, array) => (
+            <span key={slug}>
+              <Link className="hover:underline" to={`/tag/${slug}`}>
+                {name}
+              </Link>
+              {array.length - 1 > index && <span>{', '}</span>}
+            </span>
+          ))}
       </div>
       <div className="flex justify-between">
         <div>{date}</div>
