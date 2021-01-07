@@ -43,4 +43,4 @@ const postMeta: React.FC<Props> = ({ readingTime, date, tags }) => {
   )
 }
 
-export default postMeta
+export default React.memo(postMeta)

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Helmet from 'react-helmet'
 
 import styles from './style.module.css'
 
@@ -8,6 +9,10 @@ const darkModeButton: React.FC = () => {
   useEffect(() => {
     localStorage.getItem('theme') === 'light' && setIcon('moon')
     localStorage.getItem('theme') === 'dark' && setIcon('sun')
+
+    !('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches &&
+      setIcon('sun')
   }, [])
 
   function toggleColorMode(
@@ -30,16 +35,33 @@ const darkModeButton: React.FC = () => {
   }
 
   return (
-    <button
-      data-a11y="false"
-      aria-label="Ativar modo escuro"
-      title="Ativar modo escuro"
-      className={`${styles.darkMode} ${styles[icon]}`}
-      onClick={e => toggleColorMode(e)}
-    >
-      <div className={styles.darkMode__inner}></div>
-      <div className={styles.darkMode__outer}></div>
-    </button>
+    <>
+      <Helmet>
+        <script>
+          {`
+            if (
+              localStorage.getItem('theme') === 'dark' ||
+              (!('theme' in localStorage) &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
+              document.querySelector('html').classList.add('dark')
+            } else {
+              document.querySelector('html').classList.remove('dark')
+            }
+          `}
+        </script>
+      </Helmet>
+      <button
+        data-a11y="false"
+        aria-label="Ativar modo escuro"
+        title="Ativar modo escuro"
+        className={`${styles.darkMode} ${styles[icon]}`}
+        onClick={e => toggleColorMode(e)}
+      >
+        <div className={styles.darkMode__inner}></div>
+        <div className={styles.darkMode__outer}></div>
+      </button>
+    </>
   )
 }
 

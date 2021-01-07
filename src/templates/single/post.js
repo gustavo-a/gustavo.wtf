@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import { graphql } from 'gatsby'
 
 import ReadProgressBar from '@components/shared/readProgress'
-
 import Layout from '@components/layout'
 import SinglePost from '@components/post/single/singlePost'
 import Author from '@/components/post/single/author'
@@ -42,9 +41,10 @@ const post = ({ data, pageContext }) => {
         <div className="flex justify-center items-center flex-col mb-24">
           <ReadProgressBar
             attachTo={readRef}
-            color="#6c4cf6"
+            color="bg-purple-600 dark:bg-green-300"
             backgroundColor="transparent"
           />
+
           <div className="w-5/6 mt-24 mb-16" ref={readRef}>
             <SinglePost
               title={title}
@@ -55,7 +55,7 @@ const post = ({ data, pageContext }) => {
               featuredImage={featuredImage && featuredImage.node}
             />
 
-            <hr className="border-t border-gray-300" />
+            <hr className="border-t border-gray-300 dark:border-gray-500" />
           </div>
           <div className="w-5/6">
             <div className="w-full max-w-prose m-auto">

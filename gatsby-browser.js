@@ -1,4 +1,5 @@
 import './src/styles/tailwind.css'
+import './src/styles/blog.css'
 
 /**
  * Implement Gatsby's Browser APIs in this file.

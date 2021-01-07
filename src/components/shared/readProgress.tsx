@@ -2,7 +2,7 @@ import React, { useEffect, RefObject, useState } from 'react'
 
 interface ReadProgessBarProps {
   backgroundColor?: string
-  color?: string
+  color: string
   attachTo: RefObject<any>
 }
 
@@ -11,7 +11,7 @@ const ReadProgressBar: React.FC<ReadProgessBarProps> = ({
   color,
   attachTo
 }) => {
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(-100)
 
   const trackScrollEvent = () => {
     const { top, height } = attachTo.current.getBoundingClientRect()
@@ -42,11 +42,10 @@ const ReadProgressBar: React.FC<ReadProgessBarProps> = ({
 const ReadProgressBarContainer = ({ color, hide, children }) => {
   return (
     <div
-      className="flex top-0 left-0 right-0 fixed w-full overflow-hidden"
+      className={`flex top-0 left-0 right-0 fixed w-full overflow-hidden ${color}`}
       style={{
         zIndex: 9999,
-        height: hide ? 0 : 5,
-        background: color ? color : '#f00'
+        height: hide ? 0 : 5
       }}
     >
       {children}
@@ -57,9 +56,8 @@ const ReadProgressBarContainer = ({ color, hide, children }) => {
 const Bar = ({ color, style }) => {
   return (
     <div
-      className="relative left-0 top-0 bottom-0 w-full"
+      className={`relative left-0 top-0 bottom-0 w-full ${color}`}
       style={{
-        background: color || '#0ff',
         transform: 'translateX(-100%)',
         willChange: 'transform',
         ...style
