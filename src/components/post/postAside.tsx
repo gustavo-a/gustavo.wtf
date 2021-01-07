@@ -26,7 +26,6 @@ const postAside: React.FC<AsideProps> = ({ contentHeight, children }) => {
 
     const imageOffsetFromTopOfWindow = imageRect.top // + window.scrollY
     setImageOffset(imageOffsetFromTopOfWindow)
-    console.log(imageOffsetFromTopOfWindow)
 
     const handleScroll = throttle(() => {
       const el = progressRef.current

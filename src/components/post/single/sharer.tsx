@@ -5,14 +5,11 @@ import {
   EmailShareButton,
   FacebookShareButton,
   LinkedinShareButton,
-  RedditShareButton,
   TwitterShareButton,
   WhatsappShareButton,
   EmailIcon,
   FacebookIcon,
   LinkedinIcon,
-  RedditIcon,
-  TelegramIcon,
   TwitterIcon,
   WhatsappIcon
 } from 'react-share'
@@ -50,22 +47,39 @@ const sharer: React.FC<Props> = ({
       id="blog-sharer"
       className={`${className} transition-all duration-200`}
     >
-      <EmailShareButton url={currentUrl} className={linkClass}>
+      <EmailShareButton
+        url={currentUrl}
+        className={linkClass}
+        title="Compartilhar por email"
+      >
         <EmailIcon {...shareIconsOptions} />
       </EmailShareButton>
-      <FacebookShareButton url={currentUrl} className={linkClass}>
+      <FacebookShareButton
+        url={currentUrl}
+        className={linkClass}
+        title="Compartilhar no Facebook"
+      >
         <FacebookIcon {...shareIconsOptions} />
       </FacebookShareButton>
-      <LinkedinShareButton url={currentUrl} className={linkClass}>
+      <LinkedinShareButton
+        url={currentUrl}
+        className={linkClass}
+        title="Compartilhar no LinkedIn"
+      >
         <LinkedinIcon {...shareIconsOptions} />
       </LinkedinShareButton>
-      <RedditShareButton url={currentUrl} className={linkClass}>
-        <RedditIcon {...shareIconsOptions} />
-      </RedditShareButton>
-      <TwitterShareButton url={currentUrl} className={linkClass}>
+      <TwitterShareButton
+        url={currentUrl}
+        className={linkClass}
+        title="Compartilhar no Twitter"
+      >
         <TwitterIcon {...shareIconsOptions} />
       </TwitterShareButton>
-      <WhatsappShareButton url={currentUrl} className={linkClass}>
+      <WhatsappShareButton
+        url={currentUrl}
+        className={linkClass}
+        title="Compartilhar por Whatsapp"
+      >
         <WhatsappIcon {...shareIconsOptions} />
       </WhatsappShareButton>
     </div>
