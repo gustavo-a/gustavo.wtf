@@ -51,6 +51,7 @@ const sharer: React.FC<Props> = ({
         url={currentUrl}
         className={linkClass}
         title="Compartilhar por email"
+        aria-label="Compartilhar por email"
       >
         <EmailIcon {...shareIconsOptions} />
       </EmailShareButton>
@@ -58,27 +59,28 @@ const sharer: React.FC<Props> = ({
         url={currentUrl}
         className={linkClass}
         title="Compartilhar no Facebook"
+        aria-label="Compartilhar no Facebook"
       >
         <FacebookIcon {...shareIconsOptions} />
       </FacebookShareButton>
       <LinkedinShareButton
         url={currentUrl}
         className={linkClass}
-        title="Compartilhar no LinkedIn"
+        aria-label="Compartilhar no LinkedIn"
       >
         <LinkedinIcon {...shareIconsOptions} />
       </LinkedinShareButton>
       <TwitterShareButton
         url={currentUrl}
         className={linkClass}
-        title="Compartilhar no Twitter"
+        aria-label="Compartilhar no Twitter"
       >
         <TwitterIcon {...shareIconsOptions} />
       </TwitterShareButton>
       <WhatsappShareButton
         url={currentUrl}
         className={linkClass}
-        title="Compartilhar por Whatsapp"
+        aria-label="Compartilhar por Whatsapp"
       >
         <WhatsappIcon {...shareIconsOptions} />
       </WhatsappShareButton>
