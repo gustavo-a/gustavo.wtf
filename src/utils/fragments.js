@@ -73,12 +73,34 @@ export const author = graphql`
   }
 `
 
-export const seo = graphql`
-  fragment Seo on WpPost {
+export const seoPost = graphql`
+  fragment SeoPost on WpPost {
     seo {
       canonical
       metaDesc
       title
     }
+  }
+`
+
+export const seoPage = graphql`
+  fragment SeoPage on WpPage {
+    seo {
+      canonical
+      metaDesc
+      title
+    }
+  }
+`
+
+export const pageFields = graphql`
+  fragment PageFields on WpPage {
+    id
+    slug
+    uri
+    content
+    title
+    dateGmt
+    modifiedGmt
   }
 `
