@@ -17,7 +17,7 @@ const comments: React.FC<Props> = ({ id, title }) => {
     footerHeader: '#FAFAFA',
     footerHeaderText: '#484848',
     box: '#ffffff',
-    boxText: '#7C3AED',
+    boxText: '#111827',
     boxLightText: '#aaaaaa',
     backgroundText: '#7C3AED'
   }
