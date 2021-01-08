@@ -21,3 +21,11 @@ body {
     theme('colors.gray.800')
   );
 }
+
+.breadcrumb__separator {
+  @apply text-sm !important;
+}
+
+nav .breadcrumb__list {
+  @apply items-baseline;
+}

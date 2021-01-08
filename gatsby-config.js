@@ -21,7 +21,8 @@ module.exports = {
         '@styles': path.join(__dirname, 'src/styles'),
         '@svg': path.join(__dirname, 'src/assets/svg'),
         '@utils': path.join(__dirname, 'src/utils'),
-        '@config': path.join(__dirname, 'config')
+        '@config': path.join(__dirname, 'config'),
+        '@root': path.join(__dirname)
       }
     },
     {
@@ -103,6 +104,20 @@ module.exports = {
       resolve: 'gatsby-plugin-disqus',
       options: {
         shortname: 'gustavo-wtf'
+      }
+    },
+
+    {
+      resolve: 'gatsby-plugin-breadcrumb',
+      options: {
+        useAutoGen: true,
+        autoGenHomeLabel: 'Início',
+        exclude: [
+          '**/dev-404-page/**',
+          '**/404/**',
+          '**/404.html',
+          '**/offline-plugin-app-shell-fallback/**'
+        ]
       }
     },
     'gatsby-plugin-next-seo',

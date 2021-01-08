@@ -1,5 +1,6 @@
 import './src/styles/tailwind.css'
 import './src/styles/blog.css'
+import 'gatsby-plugin-breadcrumb/gatsby-plugin-breadcrumb.css'
 
 /**
  * Implement Gatsby's Browser APIs in this file.
