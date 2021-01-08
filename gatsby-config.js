@@ -115,20 +115,20 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: '#663399',
+        color: '#7C3AED',
         showSpinner: false
       }
     },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Gustavo Rocha',
+        short_name: 'Gustavo Rocha',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#7C3AED',
+        theme_color: '#7C3AED',
         display: 'minimal-ui',
-        icon: './src/assets/images/gatsby-icon.png' // This path is relative to the root of the site.
+        icon: './src/assets/images/wtf-icon.png'
       }
     },
     'gatsby-plugin-offline'
