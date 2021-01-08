@@ -5,9 +5,12 @@ import ReadProgressBar from '@components/shared/readProgress'
 import Layout from '@components/layout'
 import SinglePost from '@components/post/single/singlePost'
 import Author from '@/components/post/single/author'
-import Comments from '@/components/post/single/comments'
+import Related from '@/components/post/single/related'
 
 import Seo from '@components/infra/seo'
+
+const Comments = React.lazy(() => import('@/components/post/single/comments'))
+const isSSR = typeof window === 'undefined'
 
 const post = ({ data, pageContext }) => {
   const {
@@ -41,7 +44,7 @@ const post = ({ data, pageContext }) => {
         <div className="flex justify-center items-center flex-col mb-24">
           <ReadProgressBar
             attachTo={readRef}
-            color="bg-purple-600 dark:bg-green-300"
+            color="bg-purple-600 dark:bg-green-500"
             backgroundColor="transparent"
           />
 
@@ -58,7 +61,7 @@ const post = ({ data, pageContext }) => {
             <hr className="border-t border-gray-300 dark:border-gray-500" />
           </div>
           <div className="w-5/6">
-            <div className="w-full max-w-prose m-auto">
+            <div className="w-full lg:w-3/5 m-auto">
               <div className="mb-32">
                 <p className="text-2xl font-display font-bold mb-8">Autor</p>
                 <Author
@@ -68,10 +71,24 @@ const post = ({ data, pageContext }) => {
                   description={author.node.description}
                 />
               </div>
-              <p className="text-2xl font-display font-bold mb-8">
-                Comentários
-              </p>
-              <Comments id={slug} title={title} />
+              {data.related.nodes.length > 0 && (
+                <div className="mb-24">
+                  <p className="text-2xl font-display font-bold mb-8">
+                    Relacionados
+                  </p>
+                  <Related posts={data.related} />
+                </div>
+              )}
+              <div>
+                {!isSSR && (
+                  <React.Suspense fallback={<div />}>
+                    <p className="text-2xl font-display font-bold mb-8">
+                      Comentários
+                    </p>
+                    <Comments id={slug} title={title} />
+                  </React.Suspense>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -88,7 +105,7 @@ export const pageQuery = graphql`
       ...PostFields
       ...Author
       ...FeaturedImage
-      ...Seo
+      ...SeoPost
       ...PostTags
     }
     related: allWpPost(
@@ -100,7 +117,6 @@ export const pageQuery = graphql`
     ) {
       nodes {
         ...PostFields
-        ...FeaturedImage
       }
     }
   }

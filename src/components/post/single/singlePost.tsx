@@ -1,24 +1,29 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import Img from 'gatsby-image'
 import throttle from 'lodash/throttle'
+import parse, { domToReact } from 'html-react-parser'
 
 import PostMeta, { Tag } from '@components/post/postMeta'
 import { FeaturedImage } from '@components/post/post'
 import Sharer from '@/components/post/single/sharer'
 import PostAside from '@components/post/postAside'
+import Code from '@components/blocks/code'
+
+import { ThemeContext } from '@components/theme/themeContext'
 
 import debounce from '@utils/debounce'
 
-interface Props {
+export interface SinglePostProps {
   title: string
   content: string
   date: string
   readingTime: number
   featuredImage?: FeaturedImage
   tags: Tag[]
+  slug: string
 }
 
-const singlePost: React.FC<Props> = ({
+const singlePost: React.FC<SinglePostProps> = ({
   title,
   content,
   date,
@@ -27,6 +32,8 @@ const singlePost: React.FC<Props> = ({
   featuredImage
 }) => {
   const contentSectionRef = useRef<HTMLElement>(null)
+
+  const context = useContext(ThemeContext)
 
   const [hasCalculated, setHasCalculated] = useState<boolean>(false)
   const [contentHeight, setContentHeight] = useState<number>(0)
@@ -65,6 +72,31 @@ const singlePost: React.FC<Props> = ({
     return () => window.removeEventListener('resize', calculateBodySize)
   }, [])
 
+  const getLanguage = node => {
+    if (node.attribs.class != null) {
+      return node.attribs.class.replace('wp-block-code ', '')
+    }
+    return null
+  }
+
+  const getCode = node => {
+    if (node.children.length > 0 && node.children[0].name === 'code') {
+      return node.children[0].children
+    } else {
+      return node.children
+    }
+  }
+
+  const replaceCode = node => {
+    if (node.name === 'pre') {
+      return (
+        node.children.length > 0 && (
+          <Code language={getLanguage(node)}>{domToReact(getCode(node))}</Code>
+        )
+      )
+    }
+  }
+
   return (
     <>
       <article className="mb-8 md:mb-16" ref={contentSectionRef}>
@@ -81,20 +113,19 @@ const singlePost: React.FC<Props> = ({
         >
           {featuredImage && (
             <Img
-              className="mb-8 shadow-lg dark:shadow-gray-300-lg transition-shadow"
+              className="mb-8 shadow-lg dark:shadow-gray-300-lg transition-shadow rounded"
               fluid={featuredImage?.localFile.childImageSharp.featured}
               alt={featuredImage?.altText}
             />
           )}
         </div>
-        <div
-          className="prose xl:prose-lg dark:prose-dark m-auto"
-          dangerouslySetInnerHTML={{ __html: content }}
-        ></div>
+        <div className="prose xl:prose-lg dark:prose-dark m-auto">
+          {parse(content, { replace: replaceCode })}
+        </div>
         <Sharer
           className="flex flex-wrap lg:hidden items-center justify-end mt-12"
           bgStyle={{
-            fill: '#aaa'
+            fill: context.theme === 'dark' ? '#6B7280' : '#9CA3AF'
           }}
           iconClass="ml-3 fill-current text-gray-400"
           round={true}
@@ -105,7 +136,7 @@ const singlePost: React.FC<Props> = ({
         <Sharer
           className="hidden lg:flex items-center justify-center flex-col"
           bgStyle={{
-            fill: '#aaa'
+            fill: context.theme === 'dark' ? '#6B7280' : '#9CA3AF'
           }}
           iconClass="fill-current text-gray-400"
           linkClass="mb-4"
