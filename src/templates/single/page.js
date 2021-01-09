@@ -1,6 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
+import parse, { domToReact } from 'html-react-parser'
+
 import Layout from '@components/layout'
 import Headline from '@components/shared/headline'
 import Seo from '@components/infra/seo'
@@ -22,9 +24,10 @@ const page = ({ data, pageContext, location }) => {
         title={seo.title}
         canonical={seo.canonical}
         description={seo.metaDesc}
-        type="post"
         date={dateGmt}
         modified={modifiedGmt}
+        schema={seo.schema}
+        breadcrumbs={seo.breadcrumbs}
       />
       <div className="container mt-12 mb-12 md:mt-24 md:mb-20 px-4">
         <div className="flex">
