@@ -13,6 +13,7 @@ const Header: React.FC = () => {
         wpMenu(locations: { eq: PRIMARY }) {
           menuItems {
             nodes {
+              id
               path
               linkRelationship
               cssClasses
@@ -42,9 +43,11 @@ const Header: React.FC = () => {
                     label,
                     linkRealationship,
                     title,
-                    target
+                    target,
+                    id
                   }) => (
                     <MenuItem
+                      key={id}
                       link={path}
                       name={label}
                       classes={cssClasses}
