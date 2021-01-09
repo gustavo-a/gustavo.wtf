@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect, useContext } from 'react'
 import Img from 'gatsby-image'
 import throttle from 'lodash/throttle'
-import parse, { domToReact } from 'html-react-parser'
+import parse from 'html-react-parser'
 
 import PostMeta, { Tag } from '@components/post/postMeta'
 import { FeaturedImage } from '@components/post/post'
 import Sharer from '@/components/post/single/sharer'
 import PostAside from '@components/post/postAside'
-import Code from '@components/blocks/code'
+import parseBlocks from '@components/blocks/parseBlocks'
 
 import { ThemeContext } from '@components/theme/themeContext'
 
@@ -72,31 +72,6 @@ const singlePost: React.FC<SinglePostProps> = ({
     return () => window.removeEventListener('resize', calculateBodySize)
   }, [])
 
-  const getLanguage = node => {
-    if (node.attribs.class != null) {
-      return node.attribs.class.replace('wp-block-code ', '')
-    }
-    return null
-  }
-
-  const getCode = node => {
-    if (node.children.length > 0 && node.children[0].name === 'code') {
-      return node.children[0].children
-    } else {
-      return node.children
-    }
-  }
-
-  const replaceCode = node => {
-    if (node.name === 'pre') {
-      return (
-        node.children.length > 0 && (
-          <Code language={getLanguage(node)}>{domToReact(getCode(node))}</Code>
-        )
-      )
-    }
-  }
-
   return (
     <>
       <article className="mb-8 md:mb-16" ref={contentSectionRef}>
@@ -120,7 +95,7 @@ const singlePost: React.FC<SinglePostProps> = ({
           )}
         </div>
         <div className="prose xl:prose-lg dark:prose-dark m-auto">
-          {parse(content, { replace: replaceCode })}
+          {parse(content, { replace: parseBlocks })}
         </div>
         <Sharer
           className="flex flex-wrap lg:hidden items-center justify-end mt-12"

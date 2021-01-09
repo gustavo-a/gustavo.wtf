@@ -18,3 +18,18 @@ const codeBlock: React.FC<Props> = ({ language, children }) => (
 )
 
 export default codeBlock
+
+export const getLanguage = node => {
+  if (node.attribs.class != null) {
+    return node.attribs.class.replace('wp-block-code ', '')
+  }
+  return null
+}
+
+export const getCode = node => {
+  if (node.children.length > 0 && node.children[0].name === 'code') {
+    return node.children[0].children
+  } else {
+    return node.children
+  }
+}
