@@ -122,7 +122,13 @@ module.exports = {
     },
     'gatsby-plugin-next-seo',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
+
+    {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        failOnError: false
+      }
+    },
     'gatsby-plugin-preload-link-crossorigin',
     'gatsby-plugin-advanced-sitemap',
     'gatsby-plugin-postcss',
