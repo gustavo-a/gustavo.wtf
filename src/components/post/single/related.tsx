@@ -16,6 +16,7 @@ const relatedPosts: React.FC<Props> = ({ posts }) => {
         <Link
           className="hover:underline font-display text-lg mb-2"
           to={`/${slug}`}
+          key={slug}
         >
           {title}
         </Link>
