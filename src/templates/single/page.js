@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import parse, { domToReact } from 'html-react-parser'
+import parse from 'html-react-parser'
 
 import Layout from '@components/layout'
 import Headline from '@components/shared/headline'
@@ -11,6 +11,8 @@ import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
 import Sidebar from '@components/shared/sidebar'
 import SearchLink from '@/components/shared/search/searchLink'
 import TagList from '@components/shared/widgets/tagList'
+
+import parseBlocks from '@components/blocks/parseBlocks'
 
 const page = ({ data, pageContext, location }) => {
   const { content, title, dateGmt, modifiedGmt, seo } = data.page
@@ -43,10 +45,9 @@ const page = ({ data, pageContext, location }) => {
       </div>
       <div className="container px-4 mb-32">
         <div className="flex flex-wrap justify-between">
-          <div
-            className="prose xl:prose-lg dark:prose-dark"
-            dangerouslySetInnerHTML={{ __html: content }}
-          ></div>
+          <div className="prose xl:prose-lg dark:prose-dark">
+            {parse(content, { replace: parseBlocks })}
+          </div>
           <aside className="lg:w-1/4">
             <Sidebar>
               <SearchLink />

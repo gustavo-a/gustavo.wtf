@@ -1,5 +1,7 @@
 import './src/styles/tailwind.css'
 import './src/styles/blog.css'
+import './src/styles/forms.css'
+import './src/styles/buttons.css'
 import 'gatsby-plugin-breadcrumb/gatsby-plugin-breadcrumb.css'
 
 /**

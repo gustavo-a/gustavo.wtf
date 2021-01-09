@@ -1,10 +1,11 @@
 import React from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { Element } from 'domhandler/lib/node'
 
 interface Props {
-  language: string
-  children: React.ReactNode
+  language: string | null
+  children: any
 }
 
 const codeBlock: React.FC<Props> = ({ language, children }) => (
@@ -19,7 +20,7 @@ const codeBlock: React.FC<Props> = ({ language, children }) => (
 
 export default codeBlock
 
-export const getLanguage = node => {
+export const getLanguage = (node: Element) => {
   if (node.attribs.class != null) {
     return node.attribs.class.replace('wp-block-code ', '')
   }
