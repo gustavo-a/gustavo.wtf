@@ -89,6 +89,14 @@ export const seoPage = graphql`
       canonical
       metaDesc
       title
+      schema {
+        pageType
+        articleType
+      }
+      breadcrumbs {
+        text
+        url
+      }
     }
   }
 `

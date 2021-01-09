@@ -1,7 +1,12 @@
 import React from 'react'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
-import { GatsbySeo, BlogPostJsonLd } from 'gatsby-plugin-next-seo'
+import {
+  GatsbySeo,
+  ArticleJsonLd,
+  LogoJsonLd,
+  BreadcrumbJsonLd
+} from 'gatsby-plugin-next-seo'
 import { GatsbyImageFixedProps, GatsbyImageFluidProps } from 'gatsby-image'
 
 interface Props {
@@ -12,6 +17,11 @@ interface Props {
   type?: string
   date?: string
   modified?: string
+  schema?: {
+    articleType: string[]
+    pageType: string[]
+  }
+  breadcrumbs?: Breadcrumb[]
 }
 
 type Images = {
@@ -28,6 +38,11 @@ type Images = {
   }
 }
 
+type Breadcrumb = {
+  text: string
+  url: string
+}
+
 const seo: React.FC<Props> = ({
   title,
   description,
@@ -35,7 +50,9 @@ const seo: React.FC<Props> = ({
   images,
   type,
   date,
-  modified
+  modified,
+  breadcrumbs,
+  schema
 }) => {
   const { pathname } = useLocation()
   const seoQuery = useStaticQuery(graphql`
@@ -75,6 +92,16 @@ const seo: React.FC<Props> = ({
     })
   }
 
+  const formatBreadcrumbs = (bread: Breadcrumb[]) => {
+    return bread.map(({ text, url }, index) => {
+      return {
+        position: index + 1,
+        name: text,
+        item: `${defaults.siteUrl}${url}`
+      }
+    })
+  }
+
   return (
     <>
       <GatsbySeo
@@ -102,22 +129,34 @@ const seo: React.FC<Props> = ({
           cardType: 'summary_large_image'
         }}
       />
+
+      <LogoJsonLd
+        logo={`${defaults.siteUrl}/logo.png`}
+        url={defaults.siteUrl}
+      />
+
       {type && type === 'post' && (
-        <BlogPostJsonLd
+        <ArticleJsonLd
           url={
             canonical
               ? `${defaults.siteUrl}${canonical}`
               : `${defaults.siteUrl}${pathname}`
           }
-          title={title}
+          headline={title}
           // @ts-ignore
           images={images && openGraphImages(images).map(item => item.flattened)}
           // @ts-ignore
           datePublished={date && date}
           dateModified={modified && modified}
+          publisherName={defaults.author}
+          publisherLogo={`${defaults.siteUrl}/logo.png`}
           authorName={defaults.author}
           description={description || defaults.description}
         />
+      )}
+
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <BreadcrumbJsonLd itemListElements={formatBreadcrumbs(breadcrumbs)} />
       )}
     </>
   )
