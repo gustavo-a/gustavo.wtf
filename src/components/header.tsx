@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const menu = useStaticQuery(
     graphql`
       query MENUS {
-        wpMenu(slug: { eq: "menu-principal" }) {
+        wpMenu(locations: { eq: PRIMARY }) {
           menuItems {
             nodes {
               path
