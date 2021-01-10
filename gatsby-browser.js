@@ -3,6 +3,7 @@ import './src/styles/blog.css'
 import './src/styles/forms.css'
 import './src/styles/buttons.css'
 import 'gatsby-plugin-breadcrumb/gatsby-plugin-breadcrumb.css'
+import '@components/infra/analytics'
 
 /**
  * Implement Gatsby's Browser APIs in this file.

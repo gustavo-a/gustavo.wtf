@@ -133,6 +133,7 @@ module.exports = {
     'gatsby-plugin-advanced-sitemap',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-css-modules',
+    'gatsby-plugin-analytics',
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {
