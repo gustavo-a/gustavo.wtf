@@ -45,7 +45,7 @@ const page = ({ data, pageContext, location }) => {
       </div>
       <div className="container px-4 mb-32">
         <div className="flex flex-wrap justify-between">
-          <div className="prose xl:prose-lg dark:prose-dark">
+          <div className="prose xl:prose-lg dark:prose-dark mb-24">
             {parse(content, { replace: parseBlocks })}
           </div>
           <aside className="lg:w-1/4">

@@ -35,7 +35,7 @@ const contato: React.FC<Props> = ({ pageContext }) => {
       </div>
       <div className="container px-4 mb-32">
         <div className="flex flex-wrap justify-between">
-          <div className="w-1/3">
+          <div className="lg:w-1/3">
             <div className="prose xl:prose-lg mb-6 dark:prose-dark">
               <p>
                 Tem alguma dúvida, solicitaçao de orçamento ou quer bater um

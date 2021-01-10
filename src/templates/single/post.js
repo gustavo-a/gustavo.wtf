@@ -48,7 +48,7 @@ const post = ({ data, pageContext }) => {
             backgroundColor="transparent"
           />
 
-          <div className="w-5/6 mt-24 mb-16" ref={readRef}>
+          <div className="lg:w-5/6 mt-24 mb-16 px-4" ref={readRef}>
             <SinglePost
               title={title}
               content={content}
