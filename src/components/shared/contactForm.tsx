@@ -5,7 +5,7 @@ import axios from 'axios'
 const contactForm: React.FC = () => {
   const [isSuccessMessage, setIsSuccessMessage] = useState(false) // manage is success message state
   const [messageSent, setMessageSent] = useState(false) // manage sent message state
-  const siteUrl = 'http://admin.gustavo.lwtf'
+  const siteUrl = 'https://admin.gustavo.lwtf'
 
   const { handleChange, isSubmitting, values, handleSubmit } = useFormik({
     initialValues: {
@@ -125,7 +125,7 @@ const contactForm: React.FC = () => {
         <div className="my-4">Messagm enviada com sucesso!</div>
       )}
       {messageSent && !isSuccessMessage && (
-        <div>Oops! Parece que tem algo errado aí...</div>
+        <div className="my-4">Oops! Parece que tem algo errado aí...</div>
       )}
     </form>
   )
