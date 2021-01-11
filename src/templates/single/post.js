@@ -60,7 +60,7 @@ const post = ({ data, pageContext }) => {
 
             <hr className="border-t border-gray-300 dark:border-gray-500" />
           </div>
-          <div className="w-5/6">
+          <div className="w-5/6 mx-auto">
             <div className="w-full lg:w-3/5 m-auto">
               <div className="mb-32">
                 <p className="text-2xl font-display font-bold mb-8">Autor</p>
