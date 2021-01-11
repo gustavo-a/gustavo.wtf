@@ -28,7 +28,7 @@ const createPages = async ({ graphql, actions }) => {
         }
       }
 
-      allWpTag(filter: { count: { gte: 1 } }) {
+      allWpTag {
         nodes {
           name
           slug
