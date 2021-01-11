@@ -50,6 +50,7 @@ const IndexPage = ({
         <div className="flex flex-wrap justify-between">
           <section className="max-w-prose">
             {posts &&
+              posts.length > 0 &&
               posts.map(
                 ({
                   node: {
@@ -75,6 +76,12 @@ const IndexPage = ({
                   />
                 )
               )}
+            {posts && posts.length < 1 && (
+              <div className="text-3xl font-display">
+                Parece que ainda tem nenhum post aqui... <br /> Mas relaxa, já
+                já eu faço um!
+              </div>
+            )}
           </section>
           <aside className="lg:w-1/4">
             <Sidebar>
@@ -120,7 +127,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allTags: allWpTag(filter: { count: { gte: 1 } }) {
+    allTags: allWpTag {
       edges {
         node {
           name
